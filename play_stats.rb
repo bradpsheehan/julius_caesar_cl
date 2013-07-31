@@ -25,7 +25,7 @@ class Play
     {
       name: content,
       lines_spoken: lines_spoken(content),
-      longest_speech: longest_speech(content),
+      longest_speech: longest_speech_by(content),
       scene_appearances: scene_appearances(content),
       percent_total_scenes: percent_total_scenes(content)
     }
@@ -38,12 +38,13 @@ class Play
   def speeches
     @speeches ||= find('speech')
   end
+
   def scenes
     @scenes ||= find('scene')
   end
 
   def lines_spoken(name)
-    speeches_by(name).map { |speech| lines_in(speech).count }.inject(&:+)
+    speeches_by(name).map { |speech| lines_in(speech).count }.inject(0, :+)
   end
 
   def speeches_by(persona)
@@ -60,14 +61,14 @@ class Play
     speech.children[1..-1]
   end
 
-  def longest_speech(name)
-    speech_lengths = []
+  def longest_speech_by(name)
+    speech_lengths = [0]
     speeches.each do |speech|
-      if speech.children[0].text == name
-        speech_lengths << lines_in(speech).children.map { |a| a.content.length }.inject(&:+)
+      if speaker_of(speech) == name
+        speech_lengths << lines_in(speech).children.map { |a| a.content.length }.inject(0, :+)
       end
     end
-    return 0 if speech_lengths.max == nil
+    speech_lengths.max
   end
 
   def scene_appearances(name)

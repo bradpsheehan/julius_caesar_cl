@@ -17,7 +17,6 @@ class PlayStatsTest < MiniTest::Unit::TestCase
   def test_save
     @play.save
     refute @play.database.transaction { @play.database['play'] }.empty?
-    puts @play.database.transaction { @play.database['play'][0][:title] }
   end
 
   def test_lines_spoken
