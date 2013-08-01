@@ -5,7 +5,7 @@ class PlayApp < Sinatra::Base
    end
 
   get '/' do
-    erb :index, locals: {plays: Play.all}
+    erb :index, locals: { play: Play.latest }
   end
 
   post '/' do
@@ -13,5 +13,6 @@ class PlayApp < Sinatra::Base
     play.save
     redirect '/'
   end
-
 end
+
+

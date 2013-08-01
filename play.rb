@@ -6,21 +6,27 @@ require 'nokogiri'
 # JULIUS_CAESAR_XML = Nokogiri::HTML(open(FILE))
 
 class Play
+  attr_reader :xml
 
-  attr_reader :file, :xml
+  def initialize(url)
+    @xml = read_xml(url)
+  end
 
-   def initialize(url)
-     @file = url
-     @xml = Nokogiri::HTML(open(@file))
-   end
+  def self.latest
+    database.transaction { database['play'] || [] }
+  end
 
+  def self.database
+    @database ||= YAML::Store.new "play.yaml"
+  end
 
   def save
     database.transaction do |db|
-      db['play'] ||= []
-      db['play'] << play_data
+      db['play'] = play_data
     end
   end
+
+  private
 
   def play_data
     {
@@ -95,18 +101,11 @@ class Play
     percent_of_total.round
   end
 
-  def self.all
-    database.transaction { database['play'] || [] }.map do |data|
-      new(data[:title])
-    end
-  end
-
-  def self.database
-    @database ||= YAML::Store.new "play"
-  end
-
   def database
     Play.database
   end
 
+  def read_xml(url)
+    Nokogiri::HTML(open(url))
+  end
 end

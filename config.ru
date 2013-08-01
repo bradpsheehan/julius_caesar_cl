@@ -1,4 +1,4 @@
-require './play_stats'
+require './play'
 require 'bundler'
 Bundler.require
 
