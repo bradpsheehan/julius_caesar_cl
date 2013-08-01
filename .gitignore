@@ -1,0 +1,8 @@
+*.gem
+.bundle
+.config
+Gemfile.lock
+doc/
+lib/bundler/man
+play
+vendor
