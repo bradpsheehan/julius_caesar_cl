@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PStatify</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  </head>
+  <body style="padding-top: 50px;">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+            <a class="brand" href="/">
+              PStatify
+            </a>
+
+        </div>
+      </div>
+    </div>
+
+
+  <div class="container">
+    <%if @error then %>
+      <div class="alert alert-error"><%=@error%></div>
+    <% end %>
+    <%= yield %>
+  </div>
+  </body>
+</html>

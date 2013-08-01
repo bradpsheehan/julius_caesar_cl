@@ -20,7 +20,10 @@ class PlayStatsTest < MiniTest::Unit::TestCase
   end
 
   def test_lines_spoken
-    skip
+    @play.save
+    test_play = Play.new
+    lines_spoken = test_play.lines_spoken("CICERO")
+    assert_equal @play.database.transaction { @play.database['play'][0][:personas][4][:lines_spoken] }, lines_spoken
   end
 
   def test_longest_speech

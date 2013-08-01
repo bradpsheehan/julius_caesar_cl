@@ -2,10 +2,18 @@ require 'yaml/store'
 require 'open-uri'
 require 'nokogiri'
 
-FILE = "http://www.cafeconleche.org/examples/shakespeare/j_caesar.xml"
-JULIUS_CAESAR_XML = Nokogiri::HTML(open(FILE))
+# FILE = "http://www.cafeconleche.org/examples/shakespeare/j_caesar.xml"
+# JULIUS_CAESAR_XML = Nokogiri::HTML(open(FILE))
 
 class Play
+
+  attr_reader :file, :xml
+
+   def initialize(url)
+     @file = url
+     @xml = Nokogiri::HTML(open(@file))
+   end
+
 
   def save
     database.transaction do |db|
@@ -32,7 +40,7 @@ class Play
   end
 
   def find(node)
-    JULIUS_CAESAR_XML.xpath("//#{node}")
+    xml.xpath("//#{node}")
   end
 
   def speeches
@@ -87,8 +95,18 @@ class Play
     percent_of_total.round
   end
 
-  def database
+  def self.all
+    database.transaction { database['play'] || [] }.map do |data|
+      new(data[:title])
+    end
+  end
+
+  def self.database
     @database ||= YAML::Store.new "play"
+  end
+
+  def database
+    Play.database
   end
 
 end

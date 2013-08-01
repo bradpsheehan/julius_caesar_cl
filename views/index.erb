@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>PlayStats</title>
+  </head>
+  <body>
+    <h2>Welcome!</h2>
+    <p>Please submit a url of your favorite Shakespeare play in XML format and get details about the roles in each play!</p>
+    <form action='/' method='POST'>
+      <input type='text' name='xml_url'/><br/>
+      <input type='submit'/>
+    </form>
+    <h2>Play Breakdown</h2>
+
+      <table class="table table-striped">
+        <% plays.each do |play|%>
+          <thead>
+            <tr> <h3>Title: <%= play[:title] %><br/></h3> </tr>
+            <tr>
+              <th>Personas</th>
+              <th>Lines Spoken</th>
+              <th>Scene Appearances</th>
+              <th>Longest Speech (char. length)</th>
+              <th>% of Total Scenes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% play[:personas].each do |persona| %>
+              <tr>
+                <td><%= persona[:name] %></td>
+                <td><%= persona[:lines_spoken] %></td>
+                <td><%= persona[:scene_appearances] %></td>
+                <td><%= persona[:longest_speech] %></td>
+                <td><%= persona[:percent_total_scenes] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+  </body>
+</html>
