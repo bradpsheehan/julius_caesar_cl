@@ -1,10 +1,7 @@
 Background
 -
 
-This is a small sample project. Please approach this problem as if
-Groupize had asked you to build a new web application to solve
-it. Feel free to ask whatever questions, make whatever assumptions,
-write whatever tests and documentation you feel are appropriate.
+This is a small sample project. Please approach this problem as if you were asked to build a new web application to solve it.
 
 Project
 -
