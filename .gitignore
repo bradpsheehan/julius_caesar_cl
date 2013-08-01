@@ -4,5 +4,5 @@
 Gemfile.lock
 doc/
 lib/bundler/man
-play
+.yaml
 vendor
