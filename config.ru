@@ -4,4 +4,4 @@ Bundler.require
 
 require './play_app'
 
-run Sinatra::Application
+run PlayApp
