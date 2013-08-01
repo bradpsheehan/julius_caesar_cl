@@ -4,4 +4,4 @@ Bundler.require
 
 require './play_app'
 
-run PlayApp
+run! PlayApp
