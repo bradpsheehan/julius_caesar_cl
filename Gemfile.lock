@@ -29,5 +29,6 @@ PLATFORMS
 
 DEPENDENCIES
   nokogiri (~> 1.6.0)
+  rack
   sinatra
   sinatra-contrib
