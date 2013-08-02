@@ -4,9 +4,10 @@
   </head>
   <body>
     <h2>Welcome!</h2>
-    <p>Please submit a url of your favorite Shakespeare play in XML format and get details about the roles in each play!</p>
+    <p>Please submit a url of your favorite Shakespeare play in XML format and get details about the roles in each play! ( Try entering the following url for starters! http://www.cafeconleche.org/examples/shakespeare/j_caesar.xml )</p>
     <form action='/' method='POST'>
       <input type='text' name='xml_url'/><br/>
+      <div id="error" style="color: red"></div>
       <input type='submit' id='submit'/>
     </form>
 

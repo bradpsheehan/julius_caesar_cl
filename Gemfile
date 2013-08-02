@@ -5,6 +5,7 @@ gem 'sinatra', require: 'sinatra/base'
 gem 'sinatra-contrib', require: 'sinatra/reloader'
 gem 'nokogiri', '~> 1.6.0'
 gem 'rack'
+gem "rack-cache", "~> 1.2"
 
 group :test do
   gem 'rspec'
