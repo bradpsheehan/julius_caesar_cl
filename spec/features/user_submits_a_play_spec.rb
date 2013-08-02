@@ -1,30 +1,17 @@
-# Capybara.register_driver :rack_test do |app|
-#   Capybara::RackTest::Driver.new(app, :browser => :chrome)
-# end
+require 'acceptance_helper'
 
-require './play_app'
-require 'rspec'
-require 'rack/test'
+describe 'Visiting app' do
+  describe 'when I enter an XML endpoint' do
+    context 'with the expected formatting' do
+      it 'displays all the play statistics' do
+        visit '/'
+        expect(page).to have_content('Welcome!')
+      end
+    end
+  end
 
-require 'sinatra'
-Sinatra::Application.environment = :test
-Bundler.require :default, Sinatra::Application.environment
-
-Test::Unit::TestCase.send :include, Rack::Test::Methods
-
-# Set the Sinatra environment
-set :environment, :test
-
-# Add an app method for RSpec
-def app
-  Sinatra::Application
-end
-
-describe '/' do
-  include Rack::Test::Methods
-
-  it 'blah' do
-    get '/'
-    expect(page).to have_content 'Welcome!'
+  context 'with incorrect formatting' do
+    it 'does something else' do
+    end
   end
 end

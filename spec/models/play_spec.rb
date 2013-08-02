@@ -1,4 +1,4 @@
-require './play'
+require './lib/julius_caesar_cl/models/play'
 require 'rspec'
 require 'rack/test'
 

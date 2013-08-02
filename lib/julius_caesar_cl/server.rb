@@ -1,7 +1,7 @@
-class PlayApp < Sinatra::Base
+class Server < Sinatra::Base
 
-  configure :development do
-     register Sinatra::Reloader
+  configure do
+     set :views, "lib/julius_caesar_cl/views"
    end
 
   get '/' do

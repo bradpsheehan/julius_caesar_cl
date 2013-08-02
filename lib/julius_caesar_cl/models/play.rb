@@ -2,9 +2,6 @@ require 'yaml/store'
 require 'open-uri'
 require 'nokogiri'
 
-# FILE = "http://www.cafeconleche.org/examples/shakespeare/j_caesar.xml"
-# JULIUS_CAESAR_XML = Nokogiri::HTML(open(FILE))
-
 class Play
   attr_reader :xml
 

@@ -1,7 +1,4 @@
-require './play'
-require 'bundler'
 Bundler.require
+require './lib/julius_caesar_cl'
 
-require './play_app'
-
-run PlayApp
+run Server
