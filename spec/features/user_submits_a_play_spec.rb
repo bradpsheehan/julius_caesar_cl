@@ -38,9 +38,6 @@ describe 'Visiting app' do
       xit 'displays only 10 personas' do
       end
 
-      xit '' do
-      end
-
     end
   end
 
