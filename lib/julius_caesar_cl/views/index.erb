@@ -9,30 +9,33 @@
       <input type='text' name='xml_url'/><br/>
       <input type='submit'/>
     </form>
-    <h2>Play Breakdown</h2>
 
-      <table class="table table-striped">
-        <thead>
-          <tr> <h3>Title: <%= play[:title] %><br/></h3> </tr>
-          <tr>
-            <th>Personas</th>
-            <th>Lines Spoken</th>
-            <th>Scene Appearances</th>
-            <th>Longest Speech (char. length)</th>
-            <th>% of Total Scenes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% play[:personas].each do |persona| %>
+    <% unless play.empty? %>
+      <h2>Play Breakdown</h2>
+
+        <table class="table table-striped">
+          <thead>
+            <tr> <h3>Title: <%= play[:title] %><br/></h3> </tr>
             <tr>
-              <td><%= persona[:name] %></td>
-              <td><%= persona[:lines_spoken] %></td>
-              <td><%= persona[:scene_appearances] %></td>
-              <td><%= persona[:longest_speech] %></td>
-              <td><%= persona[:percent_total_scenes] %></td>
+              <th>Personas</th>
+              <th>Lines Spoken</th>
+              <th>Scene Appearances</th>
+              <th>Longest Speech (char. length)</th>
+              <th>% of Total Scenes</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% play[:personas].each do |persona| %>
+              <tr>
+                <td><%= persona[:name] %></td>
+                <td><%= persona[:lines_spoken] %></td>
+                <td><%= persona[:scene_appearances] %></td>
+                <td><%= persona[:longest_speech] %></td>
+                <td><%= persona[:percent_total_scenes] %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% end %>
   </body>
 </html>
