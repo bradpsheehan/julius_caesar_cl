@@ -11,4 +11,5 @@ group :test do
   gem 'launchy'
   gem 'capybara',         '0.3.9'
   gem 'pry'
+  gem 'selenium-webdriver'
 end

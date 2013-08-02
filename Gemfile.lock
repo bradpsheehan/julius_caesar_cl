@@ -73,5 +73,6 @@ DEPENDENCIES
   pry
   rack
   rspec
+  selenium-webdriver
   sinatra
   sinatra-contrib

@@ -7,37 +7,89 @@
     <p>Please submit a url of your favorite Shakespeare play in XML format and get details about the roles in each play!</p>
     <form action='/' method='POST'>
       <input type='text' name='xml_url'/><br/>
-      <input type='submit'/>
+      <input type='submit' id='submit'/>
     </form>
 
     <% unless play.empty? %>
       <h2>Play Breakdown</h2>
+      <br/>
 
-        <table class="table table-striped">
-          <thead>
-            <tr> <h3>Title: <%= play[:title] %><br/></h3> </tr>
-            <tr>
-              <th>Personas</th>
-              <th>Lines Spoken</th>
-              <th>Scene Appearances</th>
-              <th>Longest Speech (char. length)</th>
-              <th>% of Total Scenes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% play[:personas].each do |persona| %>
-              <tr>
-                <td><%= persona[:name] %></td>
-                <td><%= persona[:lines_spoken] %></td>
-                <td><%= persona[:scene_appearances] %></td>
-                <td><%= persona[:longest_speech] %></td>
-                <td><%= persona[:percent_total_scenes] %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <table class="table table-striped" id='play-table'>
+        <thead>
+          <tr> <h3></h3> </tr>
+          <tr>
+            <th><a id='name'>Personas<a></th>
+            <th><a id='lines_spoken'>Lines Spoken</a></th>
+            <th><a id='scene_appearances'>Scene Appearances</a></th>
+            <th><a id='longest_speech'>Longest Speech (char. length)</a></th>
+            <th><a id='percent_total_scenes'>% of Total Scenes</a></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
     <% end %>
-    <script type="text/javascript">
+
+    <script>
+      var play = <%= play %>
+
+      // renders table with personas and stats
+      function populateTable (personas, rows) {
+        clearTable();
+
+        _.each(personas.slice(0, rows), function (persona) {
+          $('tbody').append(tableRowHtml(persona));
+        })
+      };
+
+      // html for each row
+      function tableRowHtml (persona) {
+        return "<tr><td>" + persona.name + "</td><td>" + persona.lines_spoken + "</td><td>" + persona.scene_appearances + "</td><td>" + persona.longest_speech + "</td><td>" + persona.percent_total_scenes + "</td></tr>"
+      };
+
+      // clear table
+      function clearTable () {
+        $('tbody').html('');
+      }
+
+      // append play title to page
+      $('h3').append(play.title);
+
+      // populate table
+      populateTable(play.personas, 10);
+
+      // click header action to sort
+      $('th a').click(function(){
+        var headerTitle = $(this).attr('id'),
+            personas = _.sortBy(play.personas, function (persona) {
+              return persona[headerTitle];
+            });
+
+        // flag sort order toggle
+        $(this).toggleClass('desc')
+
+        // reverse collection if desc sort
+        if ($(this).attr('class') === 'desc') {
+          personas = personas.reverse();
+        };
+
+        // re-populate table
+        populateTable(personas, 10)
+      });
+
+      // check for proper url
+      $('#submit').click(function(e){
+        var url = $("[name='xml_url']").val();
+
+        if (url.slice(-4) !== '.xml') {
+          $('#error').html("<p>Sorry, url must end with .xml</p>")
+          e.preventDefault();
+        } else {
+          $('#error').empty();
+        };
+      });
+
     </script>
+
   </body>
 </html>

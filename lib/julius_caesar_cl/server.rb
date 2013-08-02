@@ -5,7 +5,7 @@ class Server < Sinatra::Base
    end
 
   get '/' do
-    erb :index, locals: { play: Play.latest }
+    erb :index, locals: { play: Play.latest.to_json }
   end
 
   post '/' do
